@@ -23,15 +23,29 @@ class MainFragment : Fragment() {
                               savedInstanceState: Bundle?): View {
 
         val root = inflater.inflate(R.layout.main_fragment, container, false)
-        val tv1:TextView = root.findViewById(R.id.tvTest1)
         //observing livedata
         mainViewModel.p24Rates.observe(viewLifecycleOwner, Observer {
             when(it.status){
                 Status.SUCCESS ->{
-                    tv1.text = it.data?.exchangeRate?.size.toString()
+                    root.findViewById<TextView>(R.id.tv_cur_1).text = it.data!!.exchangeRate[8].currency
+                    root.findViewById<TextView>(R.id.tv_buy_1).text = it.data.exchangeRate[8].purchaseRate.toString()
+                    root.findViewById<TextView>(R.id.tv_sell_1).text = it.data.exchangeRate[8].saleRate.toString()
+
+                    root.findViewById<TextView>(R.id.tv_cur_2).text = it.data.exchangeRate[17].currency
+                    root.findViewById<TextView>(R.id.tv_buy_2).text = it.data.exchangeRate[17].purchaseRate.toString()
+                    root.findViewById<TextView>(R.id.tv_sell_2).text = it.data.exchangeRate[17].saleRate.toString()
+
+
+                    root.findViewById<TextView>(R.id.tv_cur_3).text = it.data.exchangeRate[23].currency
+                    root.findViewById<TextView>(R.id.tv_buy_3).text = it.data.exchangeRate[23].purchaseRate.toString()
+                    root.findViewById<TextView>(R.id.tv_sell_3).text = it.data.exchangeRate[23].saleRate.toString()
+
+
+                    root.findViewById<TextView>(R.id.tv_cur_4).text = it.data.exchangeRate[9].currency
+                    root.findViewById<TextView>(R.id.tv_buy_4).text = it.data.exchangeRate[9].purchaseRate.toString()
+                    root.findViewById<TextView>(R.id.tv_sell_4).text = it.data.exchangeRate[9].saleRate.toString()
                 }
                 Status.ERROR ->{
-                    tv1.text = it.message.toString()
                 }
             }
         })
