@@ -13,8 +13,6 @@ interface ApiService {
     suspend fun getCurrencyExchangeP24(@Query("date")date:String) : P24Response
 
     //nbu request format (yyyymmdd)
-    @GET("https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date={yyyy}{mm}{dd}&json")
-    suspend fun getCurrencyExchangeNBU(@Path("yyyy")yyyy: Int,
-                                       @Path("mm")mm: Int,
-                                       @Path("dd")dd: Int) : NbuResponse
+    @GET("https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json")
+    suspend fun getCurrencyExchangeNBU(@Query("date")date: String) : NbuResponse
 }

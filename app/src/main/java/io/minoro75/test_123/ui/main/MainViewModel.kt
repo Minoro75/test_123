@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import io.minoro75.test_123.ui.data.entities.NbuResponse
 import io.minoro75.test_123.ui.data.entities.P24Response
 import io.minoro75.test_123.ui.repository.ExchangeRatesRepository
 import io.minoro75.test_123.ui.utils.NetworkUtils
@@ -19,24 +20,20 @@ class MainViewModel @ViewModelInject constructor(
     private val _p24Rates = MutableLiveData<Resource<P24Response>>()
     val p24Rates : LiveData<Resource<P24Response>> = _p24Rates
 
-    private val _dd = MutableLiveData<Int>()
-    val dd : LiveData<Int> = _dd
+    private val _nbuRates = MutableLiveData<Resource<NbuResponse>>()
+    val nbuRates : LiveData<Resource<NbuResponse>> = _nbuRates
 
-    private val _mm = MutableLiveData<Int>()
-    val mm : LiveData<Int> = _mm
-
-    private val _yyyy = MutableLiveData<Int>()
-    val yyyy : LiveData<Int> = _yyyy
 
     private val _date = MutableLiveData<String>()
     val date : LiveData<String> = _date
 
+    private val _dateNbu = MutableLiveData<String>()
+    val dateNbu : LiveData<String> = _date
+
     init {
-        _dd.value = 10
-        _mm.value = 12
-        _yyyy.value = 2020
 
         _date.value="10.10.2020"
+        _dateNbu.value="20201010"
 
     _p24Rates.postValue(Resource.loading(null))
         if (networkUtils.isNetworkConnected()){
@@ -46,13 +43,25 @@ class MainViewModel @ViewModelInject constructor(
         else{
             _p24Rates.postValue(Resource.error(null,"internet error"))
         }
+
+    _nbuRates.postValue(Resource.loading(null))
+        if (networkUtils.isNetworkConnected()){
+            fetchRates()
+        }
+
     }
+
+
 
     private fun fetchRates() {
         viewModelScope.launch {
             try {
                 _p24Rates.value = Resource.success(data = exchangeRatesRepository.getP24ExchangeRates(
                     _date.value!!
+                ))
+
+                _nbuRates.value = Resource.success(data = exchangeRatesRepository.getNbuExchangeRates(
+                    _dateNbu.value!!
                 ))
             }
 

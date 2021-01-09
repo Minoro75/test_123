@@ -9,20 +9,31 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import io.minoro75.test_123.R
+import io.minoro75.test_123.ui.data.entities.NbuResponse
 import io.minoro75.test_123.ui.utils.Status
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
 
     private val mainViewModel : MainViewModel by viewModels()
+    private lateinit var adapter: MainAdapter
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
 
         val root = inflater.inflate(R.layout.main_fragment, container, false)
+
+        val recyclerView = root.findViewById<RecyclerView>(R.id.rv_nbu)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        adapter = MainAdapter(nbuResponse = NbuResponse())
+        recyclerView.adapter = adapter
+
+
         //observing livedata
         mainViewModel.p24Rates.observe(viewLifecycleOwner, Observer {
             when(it.status){
@@ -49,7 +60,23 @@ class MainFragment : Fragment() {
                 }
             }
         })
+
+        mainViewModel.nbuRates.observe(viewLifecycleOwner, Observer {
+            when(it.status){
+                Status.SUCCESS ->{
+                    it.data?.let { news ->
+                        renderList(news)
+                    }
+                }
+            }
+        })
+
         return root
+    }
+
+    private fun renderList(nbuResponse: NbuResponse){
+        adapter.addItems(nbuResponse)
+        adapter.notifyDataSetChanged()
     }
 
 
