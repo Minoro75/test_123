@@ -15,6 +15,7 @@
         <item name="android:textColor">@color/primaryTextColor</item>
         <item name="titleTextColor">@color/primaryTextColor</item>
         <item name="android:titleTextColor">@color/primaryTextColor</item>
+        <item name="fontFamily">@font/allerta</item>
     </style>
 
     <!--Action bar-->

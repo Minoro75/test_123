@@ -6,4 +6,5 @@
     <string name="buy">Buy</string>
     <string name="sell">Sell</string>
     <string name="currency">Currency</string>
+    <string name="nbu_currency">National Bank of Ukraine rates:</string>
 </resources>
