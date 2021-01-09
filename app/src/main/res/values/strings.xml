@@ -9,4 +9,5 @@
     <string name="nbu_currency">National Bank of Ukraine rates:</string>
     <string name="uah">UAH</string>
     <string name="one">1.0</string>
+    <string name="p24_rates">PrivatBank rates:</string>
 </resources>

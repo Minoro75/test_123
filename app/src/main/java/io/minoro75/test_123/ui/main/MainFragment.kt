@@ -51,10 +51,6 @@ class MainFragment : Fragment() {
                     root.findViewById<TextView>(R.id.tv_buy_3).text = it.data.exchangeRate[23].purchaseRate.toString()
                     root.findViewById<TextView>(R.id.tv_sell_3).text = it.data.exchangeRate[23].saleRate.toString()
 
-
-                    root.findViewById<TextView>(R.id.tv_cur_4).text = it.data.exchangeRate[9].currency
-                    root.findViewById<TextView>(R.id.tv_buy_4).text = it.data.exchangeRate[9].purchaseRate.toString()
-                    root.findViewById<TextView>(R.id.tv_sell_4).text = it.data.exchangeRate[9].saleRate.toString()
                 }
                 Status.ERROR ->{
                 }

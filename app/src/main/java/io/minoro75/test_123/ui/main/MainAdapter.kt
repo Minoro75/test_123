@@ -19,6 +19,8 @@ class MainAdapter(
 				nbuResponseItem.cc
 			itemView.findViewById<TextView>(R.id.tv_nbu_currency_val).text =
 				nbuResponseItem.rate.toString()
+			itemView.findViewById<TextView>(R.id.tv_nbu_currency_name).text =
+				nbuResponseItem.txt
 		}
 	}
 
