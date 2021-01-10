@@ -6,13 +6,13 @@ import io.minoro75.test_123.ui.remote.ApiRemoteDataSource
 import javax.inject.Inject
 
 class ExchangeRatesRepository @Inject constructor(
-private val apiRemoteDataSource: ApiRemoteDataSource
+    private val apiRemoteDataSource: ApiRemoteDataSource
 ) {
-    suspend fun getP24ExchangeRates(date:String):P24Response{
-        return apiRemoteDataSource.getP24ExchangeRates(date)
-    }
+	suspend fun getP24ExchangeRates(date: String): P24Response {
+		return apiRemoteDataSource.getP24ExchangeRates(date)
+	}
 
-    suspend fun getNbuExchangeRates(date: String):NbuResponse{
-        return apiRemoteDataSource.getNbuExchangeRates(date)
-    }
+	suspend fun getNbuExchangeRates(date: String): NbuResponse {
+		return apiRemoteDataSource.getNbuExchangeRates(date)
+	}
 }

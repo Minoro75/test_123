@@ -8,11 +8,11 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
-    //privat24 request format (dd.mm.yyyy)
-    @GET("p24api/exchange_rates?json")
-    suspend fun getCurrencyExchangeP24(@Query("date")date:String) : P24Response
+	//privat24 request format (dd.mm.yyyy)
+	@GET("p24api/exchange_rates?json")
+	suspend fun getCurrencyExchangeP24(@Query("date") date: String): P24Response
 
-    //nbu request format (yyyymmdd)
-    @GET("https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json")
-    suspend fun getCurrencyExchangeNBU(@Query("date")date: String) : NbuResponse
+	//nbu request format (yyyymmdd)
+	@GET("https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json")
+	suspend fun getCurrencyExchangeNBU(@Query("date") date: String): NbuResponse
 }

@@ -7,13 +7,13 @@ import javax.inject.Inject
 class ApiRemoteDataSource @Inject constructor(
     private val apiService: ApiService
 ) :
-    ApiServiceHelper {
+	ApiServiceHelper {
 
-    override suspend fun getP24ExchangeRates(date:String): P24Response {
-        return apiService.getCurrencyExchangeP24(date)
-    }
+	override suspend fun getP24ExchangeRates(date: String): P24Response {
+		return apiService.getCurrencyExchangeP24(date)
+	}
 
-    override suspend fun getNbuExchangeRates(date: String): NbuResponse {
-        return apiService.getCurrencyExchangeNBU(date)
-    }
+	override suspend fun getNbuExchangeRates(date: String): NbuResponse {
+		return apiService.getCurrencyExchangeNBU(date)
+	}
 }

@@ -1,5 +1,6 @@
 package io.minoro75.test_123.ui.main
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,10 @@ class MainAdapter(
 	private val nbuResponse: NbuResponse
 ) : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
+	var selectedPosition = 33
+
 	class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
 		fun bind(nbuResponseItem: NbuResponseItem) {
 			itemView.findViewById<TextView>(R.id.tv_nbu_currency_code).text =
 				nbuResponseItem.cc
@@ -27,18 +31,30 @@ class MainAdapter(
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder =
 		MainViewHolder(
 			LayoutInflater.from(parent.context).inflate(
-				R.layout.rv_item,parent,false
+				R.layout.rv_item, parent, false
 			)
 		)
 
-	override fun onBindViewHolder(holder: MainViewHolder, position: Int) =
+	override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
+
+		if (selectedPosition == position) {
+			holder.itemView.setBackgroundColor(Color.parseColor("#b2ebf2"))
+		} else {
+			holder.itemView.setBackgroundColor(Color.parseColor("#ffffff"))
+		}
 		holder.bind(nbuResponseItem = nbuResponse[position])
+	}
 
 	override fun getItemCount(): Int =
 		nbuResponse.size
 
-	fun addItems(list: NbuResponse){
+	fun addItems(list: NbuResponse) {
 		nbuResponse.addAll(list)
 	}
+
+	fun clearAll() {
+		nbuResponse.clear()
+	}
+
 
 }

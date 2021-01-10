@@ -17,44 +17,45 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
+
 @InstallIn(SingletonComponent::class)
 @Module
 object NetworkModule {
 
-    @Provides
-    fun provideGson(): Gson =
-        GsonBuilder().setLenient().create()
+	@Provides
+	fun provideGson(): Gson =
+		GsonBuilder().setLenient().create()
 
-    @Provides
-    @Singleton
-    fun provideOkhttpClient(): OkHttpClient {
-        val logger = HttpLoggingInterceptor()
-        logger.level = HttpLoggingInterceptor.Level.BODY
-        return OkHttpClient.Builder()
-            .addInterceptor(logger)
-            .readTimeout(100, TimeUnit.SECONDS)
-            .connectTimeout(100, TimeUnit.SECONDS)
-            .build()
-    }
+	@Provides
+	@Singleton
+	fun provideOkhttpClient(): OkHttpClient {
+		val logger = HttpLoggingInterceptor()
+		logger.level = HttpLoggingInterceptor.Level.BODY
+		return OkHttpClient.Builder()
+			.addInterceptor(logger)
+			.readTimeout(100, TimeUnit.SECONDS)
+			.connectTimeout(100, TimeUnit.SECONDS)
+			.build()
+	}
 
-    @Provides
-    @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
-            .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("https://api.privatbank.ua/")
-            .build()
-    }
+	@Provides
+	@Singleton
+	fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+		return Retrofit.Builder()
+			.client(okHttpClient)
+			.addConverterFactory(GsonConverterFactory.create())
+			.baseUrl("https://api.privatbank.ua/")
+			.build()
+	}
 
-    @Provides
-    @Singleton
-    fun provideApiService(retrofit: Retrofit): ApiService =
-        retrofit.create(ApiService::class.java)
+	@Provides
+	@Singleton
+	fun provideApiService(retrofit: Retrofit): ApiService =
+		retrofit.create(ApiService::class.java)
 
-    @Provides
-    @Singleton
-    fun provideApiServiceHelper(apiRemoteDataSource: ApiRemoteDataSource): ApiServiceHelper =
-        apiRemoteDataSource
+	@Provides
+	@Singleton
+	fun provideApiServiceHelper(apiRemoteDataSource: ApiRemoteDataSource): ApiServiceHelper =
+		apiRemoteDataSource
 
 }

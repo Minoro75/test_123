@@ -10,4 +10,6 @@
     <string name="uah">UAH</string>
     <string name="one">1.0</string>
     <string name="p24_rates">PrivatBank rates:</string>
+    <string name="p24_error">Privat24 servers are unstable for now, please try again later</string>
+    <string name="nbu_error">National bank servers are unstable for now, please try again later</string>
 </resources>
